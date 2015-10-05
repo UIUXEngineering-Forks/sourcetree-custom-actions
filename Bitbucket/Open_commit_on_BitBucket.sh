@@ -12,16 +12,9 @@ function github_base_url() {
      exit 1;
   fi
 
-  giturl=${giturl/git\@github\.com\:/https://github.com/}
+  giturl=${giturl/git\@bitbucket\.org\:/https://bitbucket.org/}
   giturl=${giturl/\.git//}
   echo $giturl
 }
 
-function github_branch() {
-    branch="$(git symbolic-ref HEAD 2>/dev/null)" ||
-    branch="(unnamed branch)"     # detached HEAD
-    branch=${branch##refs/heads/}
-    echo $branch
-}
-
-open "$(github_base_url)tree/$(github_branch)/$1"
+open "$(github_base_url)commits/$1"
